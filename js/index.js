@@ -33,7 +33,24 @@ form.addEventListener('submit', (e) => {
   input.setAttribute("id", "task");
   input.addEventListener("change", (e) => {
     const liToToggle = e.target.parentElement;
-    
+    const spanToToggle = liToToggle.querySelector("span");
+    const done = e.target.checked;
+    if (done) {
+      spanToToggle.style.textDecoration = "line-through";
+    } else {
+      spanToToggle.style.textDecoration = "none";
+    }
+
+    tasks =tasks.map((task) => {
+      if (task.title === spanToToggle.textContent) {
+        return {
+          title: task.title,
+          done: !task.done
+        }
+      }
+      return task;
+    })
+    console.log(tasks);
   })
 
   const span = document.createElement("span");
