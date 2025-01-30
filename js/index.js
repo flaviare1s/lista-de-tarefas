@@ -1,11 +1,10 @@
 const form = document.querySelector("#todo-form");
 const TaskTitleInput = document.querySelector("#new-task-input");
 const todoList = document.querySelector("#todo-list");
-const removeTaskButton = document.querySelector("#remove-task-button");
 
 let tasks = [];
 
-form.addEventListener('submit', (e) => {
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   const taskTitle = TaskTitleInput.value;
@@ -15,13 +14,17 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
+  // Criando um ID único para a tarefa
+  const taskId = `task-${tasks.length}`;
+
   // Adicionando a nova tarefa no array de tasks
   tasks.push({
+    id: taskId,
     title: taskTitle,
-    done: false});
+    done: false,
+  });
 
   // Criando os elementos:
-
   const li = document.createElement("li");
   li.classList.add("task");
 
@@ -30,49 +33,42 @@ form.addEventListener('submit', (e) => {
 
   const input = document.createElement("input");
   input.setAttribute("type", "checkbox");
-  input.setAttribute("id", "task");
+  input.setAttribute("id", taskId);
   input.addEventListener("change", (e) => {
     const liToToggle = e.target.parentElement;
-    const spanToToggle = liToToggle.querySelector("span");
+    const labelToToggle = liToToggle.querySelector("label");
     const done = e.target.checked;
-    if (done) {
-      spanToToggle.style.textDecoration = "line-through";
-    } else {
-      spanToToggle.style.textDecoration = "none";
-    }
 
-    tasks =tasks.map((task) => {
-      if (task.title === spanToToggle.textContent) {
-        return {
-          title: task.title,
-          done: !task.done
-        }
-      }
-      return task;
-    })
+    labelToToggle.style.textDecoration = done ? "line-through" : "none";
+
+    tasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, done: !task.done } : task
+    );
+
     console.log(tasks);
-  })
+  });
 
-  const span = document.createElement("span");
-  span.textContent = taskTitle;
+  const label = document.createElement("label");
+  label.setAttribute("for", taskId);
+  label.textContent = taskTitle;
 
   const button = document.createElement("button");
   button.textContent = "x";
   button.setAttribute("id", "remove-task-button");
   button.addEventListener("click", (e) => {
     const liToRemove = e.target.parentElement;
-    const titleToRemove = liToRemove.querySelector("span").textContent;
+    const titleToRemove = label.textContent;
     tasks = tasks.filter((task) => task.title !== titleToRemove);
     todoList.removeChild(liToRemove);
     console.log(tasks);
-  })
+  });
 
   TaskTitleInput.value = "";
 
   // Adicionando a nova tarefa no HTML
   div.appendChild(input);
-  div.appendChild(span);
+  div.appendChild(label);
   li.appendChild(div);
   li.appendChild(button);
   todoList.appendChild(li);
-})
+});
