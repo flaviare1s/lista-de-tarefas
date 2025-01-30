@@ -31,6 +31,10 @@ form.addEventListener('submit', (e) => {
   const input = document.createElement("input");
   input.setAttribute("type", "checkbox");
   input.setAttribute("id", "task");
+  input.addEventListener("change", (e) => {
+    const liToToggle = e.target.parentElement;
+    
+  })
 
   const span = document.createElement("span");
   span.textContent = taskTitle;
