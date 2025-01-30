@@ -16,7 +16,9 @@ form.addEventListener('submit', (e) => {
   }
 
   // Adicionando a nova tarefa no array de tasks
-  tasks.push(taskTitle);
+  tasks.push({
+    title: taskTitle,
+    done: false});
 
   // Criando os elementos:
 
@@ -36,6 +38,9 @@ form.addEventListener('submit', (e) => {
   const button = document.createElement("button");
   button.textContent = "x";
   button.setAttribute("id", "remove-task-button");
+  button.addEventListener("click", () => {
+    li.remove();
+  })
 
   TaskTitleInput.value = "";
 
