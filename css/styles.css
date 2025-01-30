@@ -12,10 +12,12 @@ body {
   align-items: center;
   justify-content: center;
   font-family: Arial, Helvetica, sans-serif;
-  padding: 20px;
+  padding: 30px 15px;
 }
 
 main {
+  width: 500px;
+  max-width: 100%;
   padding: 20px;
   border: 1px solid #fff;
   border-radius: 10px;
@@ -24,6 +26,7 @@ main {
 h1 {
   color: #fff;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 #todo-form {
@@ -53,10 +56,35 @@ h1 {
   cursor: pointer;
 }
 
-li {
+#remove-task-button {
+  background-color: #222;
+  color: #fff;
+  padding: 0px 5px;
+  cursor: pointer;
+}
+
+#remove-task-button:hover {
+  background-color: #444;
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 13px;
-  list-style: circle;
-  list-style-position: inside;
-  margin-bottom: 10px;
+  list-style: none;
+  margin-bottom: 5px;
   padding: 10px;
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+@media screen and (max-width: 500px) {
+  h1 {
+    font-size: 20px;
+  }
 }
