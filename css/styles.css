@@ -49,6 +49,8 @@ h1 {
 }
 
 #add-task-button {
+  background-color: #fff;
+  color: #222;
   font-size: 24px;
   font-weight: bold;
   padding: 0px 10px;
