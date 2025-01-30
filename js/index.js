@@ -38,8 +38,12 @@ form.addEventListener('submit', (e) => {
   const button = document.createElement("button");
   button.textContent = "x";
   button.setAttribute("id", "remove-task-button");
-  button.addEventListener("click", () => {
-    li.remove();
+  button.addEventListener("click", (e) => {
+    const liToRemove = e.target.parentElement;
+    const titleToRemove = liToRemove.querySelector("span").textContent;
+    tasks = tasks.filter((task) => task.title !== titleToRemove);
+    todoList.removeChild(liToRemove);
+    console.log(tasks);
   })
 
   TaskTitleInput.value = "";
