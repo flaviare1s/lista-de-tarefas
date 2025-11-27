@@ -62,10 +62,10 @@ function renderTaskOnHTML(task) {
   label.style.textDecoration = task.done ? "line-through" : "none"; // Mantém o estilo salvo
 
   const button = document.createElement("button");
-  button.textContent = "x";
+  button.innerHTML = "<i class='fas fa-trash-alt'></i>";
   button.setAttribute("id", "remove-task-button");
   button.addEventListener("click", (e) => {
-    const liToRemove = e.target.parentElement;
+    const liToRemove = e.target.closest(".task");
     tasks = tasks.filter((t) => t.id !== task.id);
     todoList.removeChild(liToRemove);
 
